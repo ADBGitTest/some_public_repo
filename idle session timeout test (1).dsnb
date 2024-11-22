@@ -1,0 +1,149 @@
+[
+  {
+    "name" : "idle session timeout test",
+    "description" : null,
+    "tags" : null,
+    "version" : "6",
+    "layout" : "zeppelin",
+    "type" : "Default",
+    "readOnly" : false,
+    "snapshot" : false,
+    "template" : "dsrgmn3y",
+    "templateConfig" : "{}",
+    "paragraphs" : [
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "Have the following configuration: ",
+          "```",
+          "studio-server:",
+          "  interpreter:",
+          "    deployment:",
+          "      host:",
+          "        idle-session-timeout: 10s",
+          "      clean-up:",
+          "        enabled: true",
+          "        cron: '*/5 * * * * *' # every 5 seconds",
+          "```",
+          "",
+          "This makes it so an interpreter's session is marked as timed out after 10 seconds, and the clean up happens every 5 seconds.",
+          "So the maximum duration an interpreter session can live is 15 seconds.",
+          "",
+          "To use this notebook, first run the `Initialization` paragraph then `Verification` paragraph.",
+          "",
+          "After 15 seconds, rerun the `Verification` paragraph and you should see the following error:",
+          "```",
+          "oracle.datastudio.server.interpreter.exceptions.InterpreterStoppedException: Interpreter session was stopped. Your interpreter session might has timed out due to inactivity. Please run the notebook again from the top.",
+          "```",
+          "Rerun the `Verification` paragraph again and you should get an error containing:",
+          "```",
+          "NameError: name 'datetime' is not defined",
+          "```"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : true,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : true,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1728302362409,
+          "endTime" : 1728302362421,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p>Have the following configuration:</p>\n<pre><code>studio-server:\n  interpreter:\n    deployment:\n      host:\n        idle-session-timeout: 10s\n      clean-up:\n        enabled: true\n        cron: '*/5 * * * * *' # every 5 seconds\n</code></pre>\n<p>This makes it so an interpreter's session is marked as timed out after 10 seconds, and the clean up happens every 5 seconds.\nSo the maximum duration an interpreter session can live is 15 seconds.</p>\n<p>To use this notebook, first run the <code>Initialization</code> paragraph then <code>Verification</code> paragraph.</p>\n<p>After 15 seconds, rerun the <code>Verification</code> paragraph and you should see the following error:</p>\n<pre><code>oracle.datastudio.server.interpreter.exceptions.InterpreterStoppedException: Interpreter session was stopped. Your interpreter session might has timed out due to inactivity. Please run the notebook again from the top.\n</code></pre>\n<p>Rerun the <code>Verification</code> paragraph again and you should get an error containing:</p>\n<pre><code>NameError: name 'datetime' is not defined\n</code></pre>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : "Initialization",
+        "hasTitle" : true,
+        "message" : [
+          "%python",
+          "import datetime",
+          "someString = 'Session not invalidated'",
+          "now = datetime.datetime.now()"
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1728302366961,
+          "endTime" : 1728302366971,
+          "interpreter" : "python",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [ ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : "Verification",
+        "hasTitle" : true,
+        "message" : [
+          "%python",
+          "print(\"Elapsed since last run: \", f\"{(datetime.datetime.now() - now).total_seconds()}s\", \"(something is wrong if this is ever more than 15 seconds)\")",
+          "now = datetime.datetime.now()",
+          "print(someString)"
+        ],
+        "selectedVisualization" : "raw",
+        "visualizationConfig" : null,
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1728302368249,
+          "endTime" : 1728302368288,
+          "interpreter" : "python",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "Elapsed since last run:  1.291672s (something is wrong if this is ever more than 15 seconds)\nSession not invalidated\n",
+              "type" : "TEXT"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      }
+    ]
+  }
+]
