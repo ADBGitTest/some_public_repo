@@ -20,7 +20,7 @@
         "title" : null,
         "hasTitle" : false,
         "message" : [
-          "some changes"
+          "some other changes"
         ],
         "selectedVisualization" : null,
         "visualizationConfig" : null,
